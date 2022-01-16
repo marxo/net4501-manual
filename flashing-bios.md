@@ -1,5 +1,5 @@
 ## BIOS
-BIOS on this device is a 1Mbit (128 Kb) FLASH, soldered on board which containa a proprietary Soekris Engineering comBIOS.
+BIOS on this device is a 1Mbit (128 Kb) FLASH, soldered on board which contains a proprietary Soekris Engineering comBIOS.
 
 The net4501 comes with the Soekris Engineering netBIOS. The BIOS is designed especially for setup and
 operation using the serial port as the console. The BIOS is located in Flash memory, and can be upgraded
@@ -8,15 +8,15 @@ not lose any setup information due to CMOS battery backup power loss.
 
 Running newer Linux kernels and GRUB2 requires updating to BIOS v1.33.
 
-## Updating the BIOS
-Flashing new BIOS to your net4501 requires sending the new BIOS binary image over XMODEM protocol, over a serial connection. Binary image will be saved in memory at
+## Updating comBIOS
+Flashing new comBIOS image to your net4501 requires sending the new BIOS image over XMODEM protocol, over a serial connection. Binary image will be saved in memory at
 4000:0000, from where it is flashed later in the process.
 
 ### Prerequisites
-A null modem cable is required to communicate with your Soekris net4501. (separate page?)
+A null modem cable is required to communicate with your Soekris net4501. <!-- separate page? -->
 
 #### GNU/Linux 
-To communicate with your net4501 we can use `tio` a simple tty I/O application. To transfer the binary BIOS via XMODEM we will use `sx` which is a part of `lrzsz` package. Install it using your package manager.
+To communicate with your net4501 we can use `tio` a simple tty I/O application. To transfer the binary BIOS via XMODEM we will use [`sx`](https://linux.die.net/man/1/sz) which is a part of `lrzsz` package. Install it using your package manager.
 
 For Debian-based distros:
 ```
@@ -30,7 +30,7 @@ To temporarily disable XON/XOF flow control in a current terminal session use:
 
 This will not persist beyond your current session.
 
-Default baud rate for net4501 is `19200`, however, if working on modern hardware feel free to raise it to `115200`. If issues appear during this process lower the baud rate progressively until issues are gone.
+Default baud rate for net4501 is `19200`, however, if working on modern hardware feel free to raise it to `115200`. If issues appear during this process lower the baud rate progressively until issues are gone. <!-- separate page? -->
 
 ### Flashing
 
@@ -45,7 +45,7 @@ Replace `115200` with the appropriate baud rate for your device (default is `192
 
 3. Upon successfully connecting to the device, enter Monitor mode by pressing `CTRL+P` prior to booting. After getting to the `>` prompt, issue `download` command.
 
-Since BIOS v1.22 the download command defaults to CRC. By entering `download -` it's possible to revert to checksum.
+Since BIOS v1.22 the `download` command defaults to CRC check for verifying the flash image is OK. By entering `download -` it's possible to revert to checksum.
 
 
 4. Disconnect `tio` by pressing `CTRL+T Q` (release CTRL before pressing Q).
