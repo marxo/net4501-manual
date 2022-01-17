@@ -27,7 +27,18 @@ To transfer the binary BIOS via XMODEM we will use [`sx`](https://linux.die.net/
 For Debian-based distros:
 
 ```
-sudo apt install tio lrzsz coreutils
+apt install tio lrzsz coreutils
+```
+
+For Fedora/RHEL: 
+
+```
+dnf install tio lrzsz coreutils
+```
+
+For OpenWRT:
+```
+opkg install tio lrzsz coreutils-stty
 ```
 
 Make sure both software and hardware XON/XOFF flow control is disabled. `tio` disables both software and hardware XON/XOFF flow control by default.
