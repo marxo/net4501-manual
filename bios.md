@@ -17,10 +17,12 @@ Flashing new comBIOS image to your net4501 requires sending the new BIOS image o
 ### Prerequisites
 
 A null modem cable is required to communicate with your Soekris net4501. <!-- separate page? -->
+To communicate with your net4501 you will need a serial tty I/O application.
 
 #### GNU/Linux
 
-To communicate with your net4501 we can use `tio` a simple tty I/O application. To transfer the binary BIOS via XMODEM we will use [`sx`](https://linux.die.net/man/1/sz) which is a part of `lrzsz` package. Install it using your package manager. `stty`, which we will use to set serial connection parameters, is part of `coreutils`.
+For serial tty I/O we will use `tio`.
+To transfer the binary BIOS via XMODEM we will use [`sx`](https://linux.die.net/man/1/sz) which is a part of `lrzsz` package. Install it using your package manager. `stty`, which we will use to set serial connection parameters, is part of `coreutils`.
 
 For Debian-based distros:
 
@@ -28,8 +30,9 @@ For Debian-based distros:
 sudo apt install tio lrzsz coreutils
 ```
 
-Make sure both software and hardware XON/XOFF flow control is disabled.
-To temporarily disable XON/XOFF flow control in the current terminal session use:
+Make sure both software and hardware XON/XOFF flow control is disabled. `tio` disables both software and hardware XON/XOFF flow control by default.
+
+For other tty terminal applications, to temporarily disable XON/XOFF flow control in the current terminal session use:
 
 `stty -ixon`
 
