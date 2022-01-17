@@ -1,3 +1,5 @@
+# Specifications
+
 Soekris net4501 is an AMD Elan SC520 based, 486-class single board computer. 
 
 |   |   |

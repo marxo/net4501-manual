@@ -1,4 +1,5 @@
-## BIOS
+# BIOS
+
 BIOS on this device is a 1Mbit (128 Kb) FLASH, soldered on board which contains a proprietary Soekris Engineering comBIOS.
 
 The net4501 comes with the Soekris Engineering netBIOS. The BIOS is designed especially for setup and
@@ -9,22 +10,26 @@ not lose any setup information due to CMOS battery backup power loss.
 Running newer Linux kernels and GRUB2 requires updating to BIOS v1.33.
 
 ## Updating comBIOS
+
 Flashing new comBIOS image to your net4501 requires sending the new BIOS image over XMODEM protocol, over a serial connection. Binary image will be saved in memory at
 4000:0000, from where it is flashed later in the process.
 
 ### Prerequisites
+
 A null modem cable is required to communicate with your Soekris net4501. <!-- separate page? -->
 
-#### GNU/Linux 
-To communicate with your net4501 we can use `tio` a simple tty I/O application. To transfer the binary BIOS via XMODEM we will use [`sx`](https://linux.die.net/man/1/sz) which is a part of `lrzsz` package. Install it using your package manager.
+#### GNU/Linux
+
+To communicate with your net4501 we can use `tio` a simple tty I/O application. To transfer the binary BIOS via XMODEM we will use [`sx`](https://linux.die.net/man/1/sz) which is a part of `lrzsz` package. Install it using your package manager. `stty`, which we will use to set serial connection parameters, is part of `coreutils`.
 
 For Debian-based distros:
+
 ```
-sudo apt install tio lrzsz
+sudo apt install tio lrzsz coreutils
 ```
 
-Make sure XON/XOFF flow control is disabled.
-To temporarily disable XON/XOF flow control in a current terminal session use:
+Make sure both software and hardware XON/XOFF flow control is disabled.
+To temporarily disable XON/XOFF flow control in the current terminal session use:
 
 `stty -ixon`
 
@@ -34,7 +39,7 @@ Default baud rate for net4501 is `19200`, however, if working on modern hardware
 
 ### Flashing
 
-1. Obtain the BIOS image from Soekris http://soekris.com/downloads.html
+1. Obtain the BIOS image from Soekris <http://soekris.com/downloads.html>
 Be cautious, if running a BIOS prior to `1.20`, you will have to update to `1.26a` first, and then update to `1.33` (the latest known version).
 
 2. Connect to you net4501 via serial console. If running `tio`:
@@ -47,12 +52,12 @@ Replace `115200` with the appropriate baud rate for your device (default is `192
 
 Since BIOS v1.22 the `download` command defaults to CRC check for verifying the flash image is OK. By entering `download -` it's possible to revert to checksum.
 
-
 4. Disconnect `tio` by pressing `CTRL+T Q` (release CTRL before pressing Q).
 
 5. Send your new BIOS image to your net4501 using `sx`.
 
 In most GNU/Linux distros:
+
 ```
 sx -X xxx.bin > /dev/ttyS0 < /dev/ttyS0
 ```
